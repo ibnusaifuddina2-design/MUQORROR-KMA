@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#075b32">
+  <title>MUQARRAR KMA</title>
+  <style>
+    :root {
+      --green: #04a03a;
+      --deep: #075b32;
+      --ink: #173d29;
+      --muted: #718078;
+      --paper: #f4f8f5;
+      --line: #dce9df;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 90% 8%, rgba(4,160,58,.08), transparent 25rem),
+        var(--paper);
+    }
+    .topbar {
+      min-height: 245px;
+      padding: 34px 20px 54px;
+      color: white;
+      text-align: center;
+      background: linear-gradient(135deg, #064927, #087a3b 65%, #04a03a);
+      position: relative;
+      overflow: hidden;
+    }
+    .topbar::before, .topbar::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      width: 280px; height: 280px;
+      transform: rotate(35deg);
+    }
+    .topbar::before { left: -130px; top: -155px; }
+    .topbar::after { right: -150px; bottom: -210px; }
+    .brand-mark {
+      width: 58px; height: 58px; margin: 0 auto 13px;
+      display: grid; place-items: center;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 18px; font-size: 28px;
+      background: rgba(255,255,255,.12);
+      position: relative; z-index: 1;
+    }
+    h1 {
+      margin: 0; font-size: clamp(28px, 6vw, 42px);
+      letter-spacing: 3px; position: relative; z-index: 1;
+    }
+    .tagline {
+      margin: 10px 0 0; color: rgba(255,255,255,.82);
+      font-size: 14px; letter-spacing: .3px; position: relative; z-index: 1;
+    }
+    main {
+      width: min(100% - 32px, 680px);
+      margin: -30px auto 45px;
+      position: relative; z-index: 2;
+    }
+    .panel {
+      background: rgba(255,255,255,.97);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: clamp(22px, 5vw, 34px);
+      box-shadow: 0 16px 45px rgba(15,75,39,.09);
+    }
+    .page { display: none; animation: enter .24s ease-out; }
+    .page.active { display: block; }
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .eyebrow {
+      color: var(--green); font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-align: center; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: var(--deep); text-align: center;
+      font-size: clamp(22px, 4vw, 28px); margin: 0 0 9px;
+    }
+    .description {
+      color: var(--muted); text-align: center;
+      font-size: 14px; line-height: 1.65; margin: 0 auto 26px;
+      max-width: 430px;
+    }
+    .welcome-icon {
+      width: 94px; height: 94px; margin: 4px auto 22px;
+      display: grid; place-items: center; border-radius: 28px;
+      background: #e8f6ec; font-size: 45px;
+      box-shadow: inset 0 0 0 1px #d5eddd;
+    }
+    .cards { display: grid; gap: 13px; }
+    .cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .choice {
+      width: 100%; min-height: 92px; padding: 18px 16px;
+      border: 1px solid var(--line); border-radius: 17px;
+      background: white; color: var(--deep); text-align: center;
+      cursor: pointer; transition: transform .18s, border-color .18s, background .18s, box-shadow .18s;
+      font: inherit;
+    }
+    .choice:hover, .choice:focus-visible {
+      transform: translateY(-2px); border-color: var(--green);
+      background: #f5fcf7; box-shadow: 0 8px 20px rgba(4,160,58,.09);
+      outline: none;
+    }
+    .choice .symbol { display: block; font-size: 25px; margin-bottom: 9px; }
+    .choice strong { display: block; font-size: 15px; letter-spacing: .35px; }
+    .choice small { display: block; color: var(--muted); font-size: 12px; margin-top: 6px; }
+    .start {
+      display: block; width: min(100%, 330px); margin: 0 auto;
+      min-height: 54px; border: 0; border-radius: 14px;
+      background: var(--green); color: white; font-size: 15px;
+      font-weight: 700; letter-spacing: .6px; cursor: pointer;
+      box-shadow: 0 8px 18px rgba(4,160,58,.2); transition: background .2s, transform .2s;
+    }
+    .start:hover { background: var(--deep); transform: translateY(-1px); }
+    .back {
+      border: 0; background: transparent; color: #168044;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      padding: 4px 0 18px; display: inline-flex; align-items: center; gap: 7px;
+    }
+    .back:hover { color: var(--deep); }
+    footer {
+      text-align: center; color: #819087; font-size: 11px;
+      line-height: 1.8; padding: 0 18px 28px; letter-spacing: .5px;
+    }
+    @media (max-width: 440px) {
+      .topbar { min-height: 220px; padding-top: 28px; }
+      .cards.two { grid-template-columns: 1fr; }
+      .choice { min-height: 82px; }
+      main { width: min(100% - 22px, 680px); }
+      .panel { padding: 22px 17px; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">📚</div>
+    <h1>MUQARRAR KMA</h1>
+    <p class="tagline">Pusat Akses Muqarrar Perkuliahan</p>
+  </header>
+
+  <main>
+    <div class="panel">
+      <section id="home" class="page active">
+        <div class="eyebrow">Selamat Datang</div>
+        <div class="welcome-icon" aria-hidden="true">📖</div>
+        <h2>Muqarrar Perkuliahan</h2>
+        <p class="description">Akses kumpulan muqarrar sesuai jurusan dan kelompok perkuliahan Anda.</p>
+        <button class="start" onclick="showPage('jurusan')">MULAI <span aria-hidden="true">→</span></button>
+      </section>
+
+      <section id="jurusan" class="page">
+        <button class="back" onclick="showPage('home')">← Kembali</button>
+        <div class="eyebrow">Tahap 1</div>
+        <h2>Pilih Jurusan</h2>
+        <p class="description">Silakan pilih bidang perkuliahan.</p>
+        <div class="cards">
+          <button class="choice" onclick="showPage('usul')">
+            <span class="symbol">📚</span><strong>USULUDDIN</strong><small>أصول الدين</small>
+          </button>
+          <button class="choice" onclick="showPage('syariah')">
+            <span class="symbol">⚖️</span><strong>SYARIAH</strong><small>الشريعة</small>
+          </button>
+          <button class="choice" onclick="openDrive('lughoh')">
+            <span class="symbol">✒️</span><strong>LUGHOH</strong><small>اللغة العربية · Buka folder muqarrar</small>
+          </button>
+        </div>
+      </section>
+
+      <section id="usul" class="page">
+        <button class="back" onclick="showPage('jurusan')">← Kembali ke jurusan</button>
+        <div class="eyebrow">Jurusan Usuluddin</div>
+        <h2>Pilih Kelompok</h2>
+        <p class="description">Pilih kelompok mahasiswa untuk membuka folder muqarrar.</p>
+        <div class="cards two">
+          <button class="choice" onclick="openDrive('usulBanin')">
+            <span class="symbol">👨‍🎓</span><strong>USUL BANIN</strong><small>Mahasiswa putra</small>
+          </button>
+          <button class="choice" onclick="openDrive('usulBanat')">
+            <span class="symbol">👩‍🎓</span><strong>USUL BANAT</strong><small>Mahasiswa putri</small>
+          </button>
+        </div>
+      </section>
+
+      <section id="syariah" class="page">
+        <button class="back" onclick="showPage('jurusan')">← Kembali ke jurusan</button>
+        <div class="eyebrow">Jurusan Syariah</div>
+        <h2>Pilih Kelompok</h2>
+        <p class="description">Pilih kelompok mahasiswa untuk membuka folder muqarrar.</p>
+        <div class="cards two">
+          <button class="choice" onclick="openDrive('syariahBanin')">
+            <span class="symbol">👨‍🎓</span><strong>SYARIAH BANIN</strong><small>Mahasiswa putra</small>
+          </button>
+          <button class="choice" onclick="openDrive('syariahBanat')">
+            <span class="symbol">👩‍🎓</span><strong>SYARIAH BANAT</strong><small>Mahasiswa putri</small>
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    DEPARTEMEN PENDIDIKAN KMA<br>
+    2026–2027
+  </footer>
+
+  <script>
+    const driveLinks = {
+      usulBanin: "https://drive.google.com/drive/folders/1l37xcmxv2_iwnyRNgourC1KV2ZHd79xQ?usp=drive_link",
+      usulBanat: "https://drive.google.com/drive/folders/1v3J1nLjwtxG8mVFCSXqnrKbrLdi-ro3P?usp=drive_link",
+      syariahBanin: "https://drive.google.com/drive/folders/1dHjMcHACbESRWTHWdSh7BtDBQvYQz6pS?usp=drive_link",
+      syariahBanat: "https://drive.google.com/drive/folders/1UyHOZjL8Dh2T5a9VBoCcYBih2tgBC0dt?usp=drive_link",
+      lughoh: "https://drive.google.com/drive/folders/1Yu_r7Faki4elcP2hVQ_YlS_1lcZrc-wH?usp=drive_link"
+    };
+
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openDrive(key) {
+      const url = driveLinks[key];
+      if (url) window.open(url, "_blank", "noopener,noreferrer");
+    }
+  </script>
+</body>
+</html>
